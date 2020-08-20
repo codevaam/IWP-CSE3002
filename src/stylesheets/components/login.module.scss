@@ -1,0 +1,37 @@
+@import '../theme/theme.scss';
+
+.background {
+    background: $blue url('../../static/spotify.png') bottom left;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.title {
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    font-weight: bold;
+}
+
+.loginInput {
+    border-style: none;
+    border-radius: 20px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    padding: 9px 20px;
+    width: 20%;
+    outline-style: none;
+}
+
+.btn {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    padding: 9px 10px;
+    border-style: none;
+    border-radius: 30px;
+    background-color: $light-orange;
+}
