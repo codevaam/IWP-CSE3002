@@ -62,4 +62,14 @@
 
 .resultDiv {
     padding: 30px;
+    text-transform: uppercase;
+    background-color: $light-blue;
+    border-radius: 30px;
+    font-weight: bold;
+    width: 20vw;
+}
+
+.followBtn {
+    border-style: none;
+    background-color: transparent;
 }
