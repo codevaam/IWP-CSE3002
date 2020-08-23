@@ -2,8 +2,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 import LoginPage from './components/Login';
 import FavoriteSelect from './components/FavoriteSelect';
@@ -18,11 +17,11 @@ function Login() {
         <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
         <Route path="/interests">
           <FavoriteSelect />
+        </Route>
+        <Route path="/">
+          <Dashboard />
         </Route>
       </Switch>
     </Router>

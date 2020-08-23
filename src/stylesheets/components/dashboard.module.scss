@@ -1,0 +1,35 @@
+@import '../theme/theme.scss';
+
+.sideNav {
+    background-color: #F2F2F2;
+    margin: 0;
+    position: sticky;
+}
+
+.fullHeight {
+    height: 100vh;
+}
+
+.row {
+    height: 93%;
+}
+
+.chatBox {
+    background-color: white;
+    padding: 10px;
+}
+
+.lastText {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.artistDiv {
+    background-color: #4F4F4F;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 15px;
+    width: 45%;
+}

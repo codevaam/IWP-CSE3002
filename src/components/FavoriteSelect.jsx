@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import styles from '../stylesheets/components/interests.module.scss';
+import styles from '../stylesheets/components/favorites.module.scss';
 import Helmet from 'react-helmet';
 import Artists from '../static/test.json';
-import { render } from '@testing-library/react';
+import { Link } from 'react-router-dom';
 
 
 function FavoriteSelect() {
+    const [ArtistHtml, updateArtistHtml] = useState([]);
     const [result, updateResult] = useState([]);
     const [addedArtists, updateArtists] = useState([]);
-    const [ArtistHtml, updateArtistHtml] = useState([]);
     function searchArtist(event) {
         var name = event.target.value;
         var lowercasedFilter = name.toLowerCase();
@@ -21,12 +21,11 @@ function FavoriteSelect() {
     }
     function addArtist(event) {
         addedArtists.push(event.target.value)
-        console.log(addedArtists);
         updateArtists(addedArtists);
 
-        // ArtistHtml.push(<div key={event.target.value} className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>event.target.value</span></div>)
-        // updateArtistHtml(ArtistHtml)
-        // console.log(ArtistHtml)
+        ArtistHtml.push(<div key={event.target.value} className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>event.target.value</span></div>)
+        updateArtistHtml(ArtistHtml)
+        updateResult([])
     }
     return (
         <div>
@@ -34,11 +33,12 @@ function FavoriteSelect() {
                 <body className={styles.background} />
             </Helmet>
             <h2 className={styles.title}>ADD YOUR FAVORITE ARTISTS</h2>
-            <input type="text" placeholder="SEARCH" className={styles.search} onChange={searchArtist} />
+            <input type="text" placeholder="SEARCH" className={`m-auto ${styles.search}`} onChange={searchArtist} />
             <div className="d-flex justify-content-center w-50">
                 {addedArtists.map(item => (
                     <div key={item} className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>{item}</span></div>
                 ))}
+                {addedArtists}
                 <div className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>ADD +</span></div>
             </div>
 
@@ -55,7 +55,7 @@ function FavoriteSelect() {
             </div>
 
             <div className="d-flex justify-content-end mr-5">
-                <button className={`mb-4 ${styles.nextBtn}`}>NEXT</button>
+                <Link to="/" className={`mb-4 ${styles.nextBtn}`}>NEXT</Link>
             </div>
         </div>
     )
