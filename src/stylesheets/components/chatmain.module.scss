@@ -1,0 +1,29 @@
+@import '../theme/theme.scss';
+
+.textBox {
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 30px;
+    border: 1px solid black;
+    padding-left: 20px;
+}
+
+.textBox:focus {
+    outline-style: none;
+}
+
+.sendBtn {
+    background-color: $blue;
+    border-style: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+
+    &:focus {
+        outline-style: none;
+    }
+    
+    &:hover {
+        transition: 1s;
+        background-color: $light-blue;
+    }
+}

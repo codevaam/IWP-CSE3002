@@ -1,0 +1,22 @@
+@import '../theme/theme.scss';
+
+.profilePic {
+    height: 200px;
+    width: 200px;
+    background-color: $light-blue;
+    border-radius: 50%;
+}
+
+.editBtn {
+    background-color: $light-blue;
+    border-style: none;
+    padding: 5px 3px;
+}
+
+.profileName {
+    font-size: 2em;
+}
+
+.city {
+    font-size: 1.25em;
+}

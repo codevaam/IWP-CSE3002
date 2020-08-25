@@ -34,7 +34,7 @@ function FavoriteSelect() {
             </Helmet>
             <h2 className={styles.title}>ADD YOUR FAVORITE ARTISTS</h2>
             <input type="text" placeholder="SEARCH" className={`m-auto ${styles.search}`} onChange={searchArtist} />
-            <div className="d-flex justify-content-center w-50">
+            <div className="d-flex justify-content-center w-100">
                 {addedArtists.map(item => (
                     <div key={item} className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>{item}</span></div>
                 ))}

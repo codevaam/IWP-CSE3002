@@ -8,7 +8,6 @@ import LoginPage from './components/Login';
 import FavoriteSelect from './components/FavoriteSelect';
 import Dashboard from './components/Dashboard';
 
-
 function Login() {
   
   return (
