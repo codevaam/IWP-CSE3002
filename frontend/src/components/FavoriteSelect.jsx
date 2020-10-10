@@ -3,6 +3,7 @@ import styles from '../stylesheets/components/favorites.module.scss';
 import Helmet from 'react-helmet';
 import Artists from '../static/test.json';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 function FavoriteSelect() {
@@ -20,12 +21,19 @@ function FavoriteSelect() {
         updateResult(filteredData);
     }
     function addArtist(event) {
-        addedArtists.push(event.target.value)
+        addedArtists.push({ artistName: event.target.value, spotifyURI: event.target.id })
         updateArtists(addedArtists);
 
         ArtistHtml.push(<div key={event.target.value} className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>event.target.value</span></div>)
         updateArtistHtml(ArtistHtml)
         updateResult([])
+    }
+    const handleNext = async () => {
+        const res = await axios.post('/artists/favorites/add', {
+            uname: sessionStorage.getItem('user'),
+            artists: addedArtists,
+        })
+        console.log(res);
     }
     return (
         <div>
@@ -36,7 +44,7 @@ function FavoriteSelect() {
             <input type="text" placeholder="SEARCH" className={`m-auto ${styles.search}`} onChange={searchArtist} />
             <div className="d-flex justify-content-center w-100">
                 {addedArtists.map(item => (
-                    <div key={item} className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>{item}</span></div>
+                    <div key={item.spotifyURI} className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>{item.artistName}</span></div>
                 ))}
                 {addedArtists}
                 <div className={`mt-4 mr-2 d-flex ${styles.circle}`}><span className={`m-auto`}>ADD +</span></div>
@@ -48,14 +56,14 @@ function FavoriteSelect() {
                         <div className={`mt-4 d-flex justify-content-between ${styles.resultDiv}`}>
                             <span>{item.Artist}</span>
                             {/* item.URI */}
-                            <button className={`${styles.followBtn}`} value={item.Artist} onClick={addArtist}>Follow +</button>
+                            <button className={`${styles.followBtn}`} id={item.URI} value={item.Artist} onClick={addArtist}>Follow +</button>
                         </div>
                     </div>
                 ))}
             </div>
 
             <div className="d-flex justify-content-end mr-5">
-                <Link to="/" className={`mb-4 ${styles.nextBtn}`}>NEXT</Link>
+                <button onClick={() => handleNext()} className={`mb-4 ${styles.nextBtn}`}>NEXT</button>
             </div>
         </div>
     )

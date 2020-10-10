@@ -1,50 +1,48 @@
 import React from 'react';
 import styles from '../stylesheets/components/login.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, withRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import { motion, AnimateSharedLayout } from 'framer-motion';
+import axios from 'axios';
+// import { TextField } from '@material-ui/core'
 import { useState } from 'react'
 
 function LoginPage() {
-    // const [isLoggedin, setLoggedin] = useState(false);
-    function Item({ content }) {
-        const [isOpen, setIsOpen] = useState(true)
+    const history = useHistory();
+    const [uname, updateUname] = useState('');
+    const [psw, updatePsw] = useState('');
 
-        return (
-            <li>
-                <motion.div
-                    layoutId="outline"
-                    className="outline"
-                    initial={false}
-                    animate={{borderColor: color}}
-                    transition={spring}
-                >
-                    {isOpen && content}
-                </motion.div>
-            </li>
-        )
+    const handleSubmit = async () => {
+        const res = await axios.post('/account/login', {
+            uname: uname,
+            psw: psw
+        })
+        console.log(res);
+        if (res.data.success === true) {
+            sessionStorage.setItem('isLoggedIn', true);
+            sessionStorage.setItem('user', uname);
+            if (res.data.newAccount === false) {
+                history.push('/')
+            }
+            else {
+                history.push('/interests')
+            }
+        }
+        else {
+            alert('wrong username/ password')
+        }
     }
     return (
-
         <div>
             <Helmet>
                 <body className={styles.background} />
             </Helmet>
-            <AnimateSharedLayout>
-                <motion.ul>
-                    <Item content="LOGIN" />
-                    <Item content="REGISTER" />
-                </motion.ul>
-                {/* <h2 className={styles.title}>LOGIN</h2>
-                <h2 className={styles.title}>REGISTER</h2> */}
-            </AnimateSharedLayout>
-            <form>
-                <input type="text" placeholder="username" className={styles.loginInput} />
-                <input type="text" placeholder="password" className={styles.loginInput} />
-                <Link to="/interests" ><button type="submit" className={styles.btn}>Login</button></Link>
-            </form>
+            <h2 className={styles.title}>Login</h2>
+            <input type="text" variant="filled" placeholder="username" onChange={(e) => updateUname(e.target.value)} className={styles.loginInput} />
+            <input type="password" variant="filled" placeholder="password" onChange={(e) => updatePsw(e.target.value)} className={styles.loginInput} />
+            <Link to="/register"><span style={{ display: 'block', marginTop: 20, textAlign: "center", color: "white" }}>Register here</span></Link>
+            <button onClick={handleSubmit} className={styles.btn}>Login</button>
         </div>
     );
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
